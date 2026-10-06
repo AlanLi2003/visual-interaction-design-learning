@@ -157,8 +157,13 @@ const handleAction = (card) => {
       const target = artwork.querySelector(".scan-object");
       pulseClass(target, "is-scanning", 1050);
       window.setTimeout(() => {
-        target.querySelector(".scan-readout").textContent = "CLEAR · 42";
-        announce(card, "Scan complete. Air quality is good.");
+        if (card.dataset.style === "cyberpunk") {
+          target.querySelector(".scan-readout").textContent = "INTEGRITY VERIFIED";
+          announce(card, "Integrity check complete. The digital identity signal is verified.");
+        } else {
+          target.querySelector(".scan-readout").textContent = "CLEAR · 42";
+          announce(card, "Scan complete. Air quality is good.");
+        }
       }, 620);
       break;
     }
@@ -204,9 +209,14 @@ const handleAction = (card) => {
     }
     case "flash":
       pulseClass(artwork.querySelector(".flash-object"), "is-flashing", 750);
-      artwork.querySelector(".flash-status").textContent = "THREAT CONTAINED";
-      window.setTimeout(() => { artwork.querySelector(".flash-status").textContent = "SYSTEM NOMINAL"; }, 850);
-      announce(card, "Alert inspected. Threat contained.");
+      if (card.dataset.style === "y2k") {
+        artwork.querySelector(".flash-status").textContent = "BOOK READY";
+        announce(card, "The Creative Act is ready as your personal library recommendation.");
+      } else {
+        artwork.querySelector(".flash-status").textContent = "THREAT CONTAINED";
+        window.setTimeout(() => { artwork.querySelector(".flash-status").textContent = "SYSTEM NOMINAL"; }, 850);
+        announce(card, "Alert inspected. Threat contained.");
+      }
       break;
     case "magnetic": {
       const active = artwork.classList.toggle("is-magnetic-active");
@@ -217,7 +227,10 @@ const handleAction = (card) => {
     case "zoom": {
       const focused = artwork.classList.toggle("is-focused");
       trigger.setAttribute("aria-pressed", String(focused));
-      announce(card, focused ? "Metric brought into focus; comparison remains available." : "Returned to the full metric context.");
+      const spatialRoom = card.dataset.sceneId === "spatial-zoom-35";
+      announce(card, focused
+        ? spatialRoom ? "Room 08 brought into focus; 12 spatial objects remain in view." : "Metric brought into focus; comparison remains available."
+        : spatialRoom ? "Returned to the room overview." : "Returned to the full metric context.");
       break;
     }
     case "press": {

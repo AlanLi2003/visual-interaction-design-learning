@@ -12,21 +12,27 @@ const artworkMarkup = (scene) => {
     case "orbit":
       return `<div class="art-object orbit-object" aria-hidden="true"><i class="orbit-ring orbit-ring--outer"></i><i class="orbit-ring orbit-ring--inner"></i><i class="orbit-core"></i><i class="orbit-node"></i><span class="orbit-readout">${escapeHTML(scene.scene.focus)}</span></div><div class="art-caption">${shape}<span>connected nodes</span></div>`;
     case "bounce":
-      return `<div class="art-object bounce-object" aria-hidden="true"><i class="bounce-spark">✦</i><i class="bounce-orb"></i><span class="art-label">${escapeHTML(scene.scene.focus)}</span></div><div class="art-caption">${shape}<span>lesson ready</span></div>`;
+      return `<div class="art-object bounce-object" aria-hidden="true"><i class="bounce-spark">✦</i><i class="bounce-orb"><i class="bounce-eye bounce-eye--left"></i><i class="bounce-eye bounce-eye--right"></i><i class="bounce-cheek bounce-cheek--left"></i><i class="bounce-cheek bounce-cheek--right"></i><i class="bounce-mouth"></i></i><span class="art-label">${escapeHTML(scene.scene.focus)}</span></div><div class="art-caption">${shape}<span>lesson ready</span></div>`;
     case "flip":
-      return `<div class="art-object flip-object" aria-hidden="true"><div class="flip-face flip-face--front"><span class="flip-symbol">✳</span><span>${escapeHTML(scene.scene.focus)}</span></div><div class="flip-face flip-face--back"><span class="flip-symbol">↗</span><span>Made to be shared</span></div></div><div class="art-caption">${shape}<span>two sides of the story</span></div>`;
+      return `<div class="art-object flip-object" aria-hidden="true"><div class="flip-card"><div class="flip-face flip-face--front"><span class="flip-symbol">✳</span><span>${escapeHTML(scene.scene.focus)}</span></div><div class="flip-face flip-face--back"><span class="flip-symbol">↗</span><span>${escapeHTML(scene.scene.flipBack || "Made to be shared")}</span></div></div></div><div class="art-caption">${shape}<span>two sides of the story</span></div>`;
     case "accordion":
       return `<div class="art-object accordion-object"><div class="accordion-title"><span>${escapeHTML(scene.scene.focus)}</span><span class="accordion-chevron" aria-hidden="true">⌄</span></div><div class="accordion-panel" id="panel-${scene.id}" aria-hidden="true" inert><p>${escapeHTML(scene.scene.summary)}</p><span>${escapeHTML(scene.scene.supporting[1][1])} · details revealed</span></div></div><div class="art-caption">${shape}<span>open / close</span></div>`;
     case "reveal":
       return `<div class="art-object reveal-object"><div class="reveal-rule"></div><strong class="reveal-copy">${escapeHTML(scene.scene.focus)}</strong><span class="reveal-note" id="reveal-${scene.id}" aria-hidden="true">${escapeHTML(scene.scene.summary)}</span></div><div class="art-caption">${shape}<span>masked content</span></div>`;
-    case "slide":
-      return `<div class="art-object slide-object"><div class="rail-viewport"><div class="rail-track"><div class="rail-item"><span>01</span><strong>${escapeHTML(scene.scene.focus)}</strong><small>${escapeHTML(scene.scene.domain)}</small></div><div class="rail-item"><span>02</span><strong>${escapeHTML(scene.scene.supporting[1][1])}</strong><small>Next in the sequence</small></div><div class="rail-item"><span>03</span><strong>One useful next step</strong><small>Keep the context in view</small></div></div></div><div class="rail-controls"><span class="rail-progress">01 / 03</span><span class="rail-dots" aria-hidden="true">● ○ ○</span></div></div><div class="art-caption">${shape}<span>content rail</span></div>`;
+    case "slide": {
+      const railItems = scene.scene.railItems || [
+        { number: "01", title: scene.scene.focus, meta: scene.scene.domain },
+        { number: "02", title: scene.scene.supporting[1][1], meta: "Next in the sequence" },
+        { number: "03", title: "One useful next step", meta: "Keep the context in view" },
+      ];
+      return `<div class="art-object slide-object"><div class="rail-viewport"><div class="rail-track">${railItems.map((item) => `<div class="rail-item"><span>${escapeHTML(item.number)}</span><strong>${escapeHTML(item.title)}</strong><small>${escapeHTML(item.meta)}</small></div>`).join("")}</div></div><div class="rail-controls"><span class="rail-progress">01 / 03</span><span class="rail-dots" aria-hidden="true">● ○ ○</span></div></div><div class="art-caption">${shape}<span>content rail</span></div>`;
+    }
     case "flash":
       return `<div class="art-object flash-object" aria-hidden="true"><i class="flash-streak"></i><span class="flash-icon">✳</span><strong>${escapeHTML(scene.scene.focus)}</strong><small class="flash-status">SYSTEM NOMINAL</small></div><div class="art-caption">${shape}<span>bounded signal</span></div>`;
     case "magnetic":
       return `<div class="art-object magnetic-object"><i class="magnetic-field"></i><div class="magnetic-target"><span>↗</span><strong>${escapeHTML(scene.scene.focus)}</strong></div><div class="magnetic-orbit" aria-hidden="true"></div></div><div class="art-caption">${shape}<span>move pointer to attract</span></div>`;
     case "zoom":
-      return `<div class="art-object zoom-object"><i class="zoom-backdrop" aria-hidden="true"></i><div class="zoom-target"><span>${escapeHTML(scene.scene.supporting[0][0])}</span><strong>${escapeHTML(scene.scene.focus)}</strong><small>compared with previous period</small></div><span class="zoom-context">${escapeHTML(scene.scene.supporting[1][0])} · ${escapeHTML(scene.scene.supporting[1][1])}</span></div><div class="art-caption">${shape}<span>focus / context</span></div>`;
+      return `<div class="art-object zoom-object"><i class="zoom-backdrop" aria-hidden="true"></i><div class="zoom-target"><span>${escapeHTML(scene.scene.supporting[0][0])}</span><strong>${escapeHTML(scene.scene.focus)}</strong><small>${escapeHTML(scene.scene.focusDetail || "compared with previous period")}</small></div><span class="zoom-context">${escapeHTML(scene.scene.supporting[1][0])} · ${escapeHTML(scene.scene.supporting[1][1])}</span></div><div class="art-caption">${shape}<span>focus / context</span></div>`;
     case "press":
       return `<div class="art-object press-object"><i class="press-orbit"></i><span class="press-label">HOLD TO FEEL</span><span class="press-icon">↓</span><span class="press-shadow"></span></div><div class="art-caption">${shape}<span>touch to compress</span></div>`;
     case "stack":

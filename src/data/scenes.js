@@ -37,11 +37,11 @@ const rows = [
   ["futuristic", "scan", "Scanning Loop", "Cut HUD", "Climate intelligence", "Read the atmosphere in real time.", "A clear scan turns shifting air-quality data into a decision you can act on.", "Run air scan", ["Air quality", "Good · 42"], ["Next pass", "00:18"]],
   ["futuristic", "orbit", "Orbital Navigation", "Radial Ring", "Satellite planning", "Keep every relay in view.", "Follow a live satellite path and inspect the next handoff window.", "Select relay", ["Relay 04", "Online"], ["Pass window", "6 min"]],
   ["cartoon", "bounce", "Elastic Bounce", "Character Card", "Learning studio", "Small lessons, big momentum.", "Meet a friendly guide that keeps a daily language practice moving.", "Start today’s lesson", ["Daily streak", "12 days"], ["Lesson time", "08 min"]],
-  ["cartoon", "flip", "Playful Flip", "Bubble Window", "Community garden", "Grow something together.", "Turn a seed card to discover a neighbor’s seasonal planting tip.", "Reveal the tip", ["Seeds shared", "128"], ["Local growers", "36"]],
+  ["cartoon", "flip", "Playful Flip", "Bubble Window", "Community garden", "Grow something together.", "Turn a seed card to discover a neighbor’s seasonal planting tip.", "Reveal the tip", ["Seeds shared", "128"], ["Local growers", "36"], { flipBack: "Peas thrive in cool soil." }],
   ["cartoon", "accordion", "Candy Accordion", "Pill List", "Wellness", "A gentler start to your day.", "Open a short breathing routine and choose a pace that feels right.", "View breathing routine", ["Session", "04 min"], ["Pace", "Easy"]],
   ["minimal", "reveal", "Masked Reveal", "Split Editorial Panel", "Creative portfolio", "Make the work speak first.", "A quiet case-study cover reveals the thinking behind a finished identity.", "Read the case study", ["Project", "Fieldnotes"], ["Year", "2025"]],
   ["minimal", "accordion", "Quiet Accordion", "Sidebar List", "Personal finance", "Know where the month goes.", "Expand a spending category to see a calm, useful breakdown.", "Review categories", ["Spent", "$1,284"], ["Budget left", "$716"]],
-  ["minimal", "slide", "Silent Slider", "Long Card", "Reading list", "Pick up where you left off.", "Move through saved essays with the context and reading time intact.", "Continue reading", ["Next story", "06 min"], ["Saved", "14 items"]],
+  ["minimal", "slide", "Silent Slider", "Long Card", "Reading list", "Pick up where you left off.", "Move through saved essays with the context and reading time intact.", "Continue reading", ["Next story", "06 min"], ["Saved", "14 items"], { railItems: [{ number: "01", title: "A Room for Attention", meta: "Current read · 06 min" }, { number: "02", title: "The Shape of a Day", meta: "Next in your list · 08 min" }, { number: "03", title: "A Practice of Looking", meta: "Saved essay · 05 min" }] }],
   ["cyberpunk", "flash", "Glitch Flash", "Bevel Panel", "Security operations", "Catch a threat before it spreads.", "A bounded alert pulse highlights the device that needs attention.", "Inspect alert", ["Risk", "Contained"], ["Devices", "03 flagged"]],
   ["cyberpunk", "scan", "Security Scan", "HUD Frame", "Digital identity", "Verify the signal, not the noise.", "Run a local integrity check and review each verified layer.", "Start integrity scan", ["Integrity", "98.6%"], ["Last check", "2 min ago"]],
   ["cyberpunk", "slide", "Neon Rail", "Hard Card", "Music discovery", "Follow the night frequency.", "Browse a curated line-up of independent electronic radio sets.", "Explore broadcasts", ["On air", "Channel 07"], ["Listeners", "1.2k"]],
@@ -53,8 +53,8 @@ const rows = [
   ["clay", "morph", "Blob Morph", "Soft Blob", "Art practice", "Let a rough idea take shape.", "A changing color study makes room for play before the final mark.", "Try another study", ["Palette", "Warm dusk"], ["Studies", "09"]],
   ["editorial", "reveal", "Editorial Reveal", "Split Frame", "Cultural journal", "The city changes after rain.", "A field note opens onto the people and places behind a neighborhood archive.", "Read field note", ["Issue", "No. 08"], ["Read", "4 min"]],
   ["editorial", "parallax", "Image Parallax", "Cropping Frame", "Travel journal", "Light moves through the valley.", "A considered crop follows the landscape without pulling focus from the story.", "Explore the route", ["Region", "Dolomites"], ["Season", "Autumn"]],
-  ["editorial", "slide", "Column Slide", "Magazine Strip", "Independent magazine", "Ideas move across disciplines.", "A column rail connects essays on craft, culture, and the tools between them.", "Browse the issue", ["Edition", "Autumn 25"], ["Stories", "18"]],
-  ["y2k", "flip", "Window Flip", "Bubble Window", "Digital collectibles", "A little future, saved.", "Turn the collectible window to see its maker note and edition history.", "Open collection", ["Edition", "042 / 500"], ["Creator", "Mina Park"]],
+  ["editorial", "slide", "Column Slide", "Magazine Strip", "Independent magazine", "Ideas move across disciplines.", "A column rail connects essays on craft, culture, and the tools between them.", "Browse the issue", ["Edition", "Autumn 25"], ["Stories", "18"], { railItems: [{ number: "01", title: "Materials for a Changing City", meta: "Feature · Autumn 25" }, { number: "02", title: "Listening as Research", meta: "Culture · Essay" }, { number: "03", title: "Tools for the Common Good", meta: "Craft · 9 min read" }] }],
+  ["y2k", "flip", "Window Flip", "Bubble Window", "Digital collectibles", "A little future, saved.", "Turn the collectible window to see its maker note and edition history.", "Open collection", ["Edition", "042 / 500"], ["Creator", "Mina Park"], { flipBack: "Mina Park · edition 042 / 500" }],
   ["y2k", "marquee", "Chrome Marquee", "Pill Strip", "Music archive", "A soundtrack for new beginnings.", "A smooth chrome strip carries the latest releases across a small listening room.", "Browse new releases", ["New this week", "24 tracks"], ["Curated by", "Studio FM"]],
   ["y2k", "flash", "Pop-up Flash", "Retro Window", "Personal library", "Your next favorite is waiting.", "A brief pop-up surfaces a book from your reading history, then settles.", "Open recommendation", ["Picked for you", "The Creative Act"], ["Why this", "Saved topic"]],
   ["bento", "magnetic", "Tile Magnet", "Grid Tile", "Team analytics", "One clear view of team health.", "Bring the metric tile you need closer while keeping the dashboard balanced.", "Open team overview", ["Projects on track", "86%"], ["Updated", "Today"]],
@@ -67,14 +67,14 @@ const rows = [
   ["brutal", "press", "Physical Press", "Hard Button", "Event booking", "Put the date on the calendar.", "A tactile confirm button makes the selected workshop booking feel final.", "Reserve your place", ["Workshop", "Type & Form"], ["Places left", "06"]],
   ["brutal", "accordion", "Block Accordion", "Sidebar Block", "Learning platform", "Build the skill one block at a time.", "Expand a course module to see the next exercise and its time estimate.", "View course modules", ["Course", "Design systems"], ["Progress", "64%"]],
   ["spatial", "orbit", "Orbital Motion", "Radial Ring", "Spatial computing", "Navigate knowledge in every direction.", "Orbit around connected research nodes and open the source that matters.", "Explore the network", ["Nodes", "128"], ["Connections", "406"]],
-  ["spatial", "zoom", "Depth Focus", "Floating Orb", "Immersive workspace", "Bring a world closer to explore it.", "Focus a spatial artifact while its surrounding layers hold their distance.", "Enter the workspace", ["Workspace", "Room 08"], ["Objects", "12"]],
+  ["spatial", "zoom", "Depth Focus", "Floating Orb", "Immersive workspace", "Bring a room into focus.", "Focus Room 08 while its twelve spatial objects hold their distance.", "Enter Room 08", ["Focused room", "Room 08"], ["Spatial objects", "12"], { focusDetail: "room-scale view" }],
   ["spatial", "parallax", "Spatial Parallax", "Depth Island", "Spatial audio", "See the sound move around you.", "A layered listening space maps a mix to a focal object and its orbiting tracks.", "Open the listening space", ["Active layers", "05"], ["Listening mode", "Spatial"]],
 ];
 
 const byStyle = new Map(styles.map((item) => [item.id, item]));
 const byFamily = new Map(families.map((item) => [item.id, item]));
 
-export const scenes = rows.map(([styleId, familyId, variant, shape, domain, headline, summary, action, statA, statB], index) => {
+export const scenes = rows.map(([styleId, familyId, variant, shape, domain, headline, summary, action, statA, statB, content = {}], index) => {
   const style = byStyle.get(styleId);
   const family = byFamily.get(familyId);
   const number = String(index + 1).padStart(2, "0");
@@ -86,6 +86,7 @@ export const scenes = rows.map(([styleId, familyId, variant, shape, domain, head
     headline,
     summary,
     action,
+    ...content,
     focus: statA[1],
     supporting: [statA, statB],
     familyStates: family.states,
