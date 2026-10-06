@@ -158,8 +158,9 @@ const handleAction = (card) => {
       pulseClass(target, "is-scanning", 1050);
       window.setTimeout(() => {
         if (card.dataset.style === "cyberpunk") {
-          target.querySelector(".scan-readout").textContent = "INTEGRITY VERIFIED";
-          announce(card, "Integrity check complete. The digital identity signal is verified.");
+          target.querySelector(".scan-readout").textContent = "IDENTITY INTEGRITY VERIFIED";
+          artwork.querySelector(".scan-status").textContent = "identity integrity verified";
+          announce(card, "Identity integrity check complete. The digital identity signal is verified.");
         } else {
           target.querySelector(".scan-readout").textContent = "CLEAR · 42";
           announce(card, "Scan complete. Air quality is good.");
@@ -172,7 +173,7 @@ const handleAction = (card) => {
       announce(card, artwork.classList.contains("is-selected") ? "Relay selected. The orbital route is highlighted." : "Relay selection cleared.");
       break;
     case "bounce":
-      pulseClass(artwork.querySelector(".bounce-object"), "is-bouncing", 900);
+      pulseClass(artwork.querySelector(".bounce-avatar"), "is-bouncing", 900);
       announce(card, "Lesson is ready. The guide has bounced into focus.");
       break;
     case "flip": {
